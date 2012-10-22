@@ -52,6 +52,7 @@ set shortmess=atI
 " Do not indent comments on next line.
 autocmd BufNewFile,BufRead * setlocal formatoptions=tnq
 
+let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 " Do not indent when pasting: press F11 before and again, afterwards
 "set pastetoggle=<F11>
