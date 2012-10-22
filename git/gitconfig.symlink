@@ -1,10 +1,10 @@
 [user]
         name = Stefan Bunk
-        email = stefan.bunk@googlemail.com
+        email = stefan.bunk@student.hpi.uni-potsdam.de
 [alias]
-	lg = log
-	st = status
-	timeline = log --oneline --graph --decorate
+        lg = log
+        st = status
+        timeline = log --oneline --graph --decorate
         co = checkout
         promote = !$ZSH/bin/git-promote
         wtf     = !$ZSH/bin/git-wtf
