@@ -1,0 +1,101 @@
+
+export MAGLEV_HOME="~/HPI-GSS-BuildEnv/git/"
+export GEMSTONE_GLOBAL_DIR=$MAGLEV_HOME
+export GEMSTONE="$MAGLEV_HOME/gemstone"
+source "$MAGLEV_HOME/gemstone/bin/gemsetup.sh"
+export PATH=$PATH:$MAGLEV_HOME/bin
+export VISUALWORKS="~/vw79public"
+
+export MAGLEV_OPTS=-d
+
+function rbenv_setup {
+    if [ ! -e "$HOME/.rbenv" ]; then
+#        print "Install rbenv? (Y/n)"
+#        read answer
+#        if [ $answer == "y" || $answer == "Y" ]; then
+            git clone https://github.com/sstephenson/rbenv.git "$HOME/.rbenv"
+            git clone https://github.com/sstephenson/ruby-build.git "$HOME/.ruby-build"
+#        else
+            touch "$HOME/.rbenv"
+#        fi
+#        unset answer
+    fi
+
+    if [ -d "$HOME/.rbenv/bin" ]; then
+        export PATH="$HOME"/.rbenv/bin:"$HOME"/.rbenv/shims:"$HOME"/.ruby-build/bin:$PATH
+        source ~/.rbenv/completions/rbenv.zsh
+        eval "$(rbenv init -)"
+        rbenv rehash
+
+        function use {
+            export RBENV_VERSION=$1
+        }
+
+        function __use-ruby-completion {
+            COMPREPLY=()
+            local word="${COMP_WORDS[COMP_CWORD]}"
+            COMPREPLY=( $(compgen -W "$(ls ~/.rbenv/versions/)" -- "$word") )
+        }
+
+#        complete -F __use-ruby-completion use
+    fi
+}
+
+rbenv_setup
+
+#
+# Copied from Peter's mail from 19.10.2012
+#
+
+function mopt {
+    if [[ $# -gt 0 ]] ;
+    then
+        new_opts=$MAGLEV_OPTS
+        while [ $# -gt 0 ]
+        do
+            case $1 in
+                none)  new_opts="" ;;
+                d)     new_opts="$new_opts -d" ;;
+                q)     new_opts="$new_opts -q" ;;
+                t)     new_opts="$new_opts -MtraceLoad" ;;
+                r)     new_opts="$new_opts -Mrlwrap" ;;
+                help)
+                    echo "mopt [d|trace|traced|rlwrap]"
+                    echo "d    Turns on -d"
+                    echo "q    Turns on -q"
+                    echo "t    Turns on -MtraceLoad"
+                    echo "r    Turns on -Mrlwrap"
+                    echo "none unsets MAGLEV_OPTS"
+                    echo
+                    echo "Multiple options can be given: "
+                    echo "  mopt d i"
+                    ;;
+            esac
+            shift
+        done
+        export MAGLEV_OPTS=$new_opts
+    fi
+    echo "MAGLEV_OPTS is: $MAGLEV_OPTS"
+}
+
+# List environment variables that affect GemStone / MagLev
+function mlenv {
+    echo "=============================="
+    env | grep -e 'GEMSTONE\|gs64ldi\|MAGLEV' | sort
+    echo "PATH:   $PATH"
+    echo "=============================="
+    echo
+}
+
+# Ensure $MAGLEV_HOME is set and is a reasonable value
+function goodMl {
+    if [[ -z $MAGLEV_HOME ]]; then
+        echo "\$MAGLEV_HOME is not set"
+        return 1
+    fi
+    if [[ ! -d $MAGLEV_HOME ]]; then
+        echo "\$MAGLEV_HOME ($MAGLEV_HOME) is not a directory"
+        return 2
+    fi
+    # otherwise, OK
+}
