@@ -1,1 +1,1 @@
-alias rmgemlogs="rm gem_*.log"
+alias rmgemlogs="rm -f gem_*.log"
