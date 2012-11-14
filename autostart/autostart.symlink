@@ -2,7 +2,7 @@
 tilda &
 
 # start devilspie
-devilspie &
+#devilspie &
 
 sleep 1
 
@@ -11,10 +11,10 @@ sleep 1
 #gvim -c 'set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)\ -\ GVIM2'
 
 # wait ten seconds before start, so Ubuntu can connect to WLAN
-sleep 9
+#sleep 9
 
 # start vpn-wlan
-/etc/networkmanager/dispatcher.d/02vpn_start
+# /etc/networkmanager/dispatcher.d/02vpn_start
 
 # launch ubuntuone
 ubuntuone-launch
