@@ -9,4 +9,4 @@ alias cdr="~/rails-books-library"
 alias vw="$VISUALWORKS/bin/linux86/visual $VISUALWORKS/image/maglev_.im"
 alias cdm="~/HPI-GSS-BuildEnv/git"
 alias cdmaglevgems="~/HPI-GSS-BuildEnv/git/lib/maglev/gems/1.8/gems/"
-alias cdsmm='cd smm2013-group3'
+alias cdsmm='cd ~/smm2013-group3'
