@@ -3,4 +3,5 @@
 *~
 *.swp
 *.rbc
-go.sh
+*.sublime-project
+*.sublime-workspace
