@@ -4,3 +4,5 @@
 *.swp
 *.rbc
 maglev.hpi.key
+*.sublime-project
+*.sublime-workspace
