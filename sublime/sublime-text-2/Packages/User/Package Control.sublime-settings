@@ -1,13 +1,13 @@
 {
+	"auto_upgrade_last_run": null,
 	"installed_packages":
 	[
-		"AdvancedNewFile",
-		"BracketHighlighter",
 		"Git",
-		"Gitignore",
+		"GitGutter",
+		"Inc-Dec-Value",
 		"Package Control",
+		"Pretty JSON",
 		"Rake",
-		"Simple Rails Navigator",
 		"SublimeBlockCursor",
 		"Sublimerge",
 		"Theme - Soda"
