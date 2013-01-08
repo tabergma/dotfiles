@@ -1,2 +1,18 @@
 unsetopt nomatch
 alias rmgemlogs="rm -f gem_*.log"
+
+alias mrun="maglev-ruby -e "
+
+function buildmaglev() {
+	use ruby
+	rake maglev:stop
+	rake stone:destroy[maglev]
+	rake build:clobber
+	rake build:maglev
+}
+
+function primsreload() {
+	use ruby
+	rake maglev:reload_prims
+	use maglev
+}
