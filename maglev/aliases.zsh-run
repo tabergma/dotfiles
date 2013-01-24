@@ -9,6 +9,8 @@ function buildmaglev() {
 	rake stone:destroy[maglev]
 	rake build:clobber
 	rake build:maglev
+	use maglev
+	maglev start
 }
 
 function primsreload() {
