@@ -7,3 +7,5 @@ begin
 rescue LoadError => err
   warn "Couldn't load Wirble: #{err}"
 end
+
+$LOAD_PATH << "./lib"
