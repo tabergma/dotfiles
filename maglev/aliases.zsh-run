@@ -18,3 +18,23 @@ function primsreload() {
 	rake maglev:reload_prims
 	use maglev
 }
+
+function newteststone() {
+	cdm
+	use ruby
+	rake stone:destroy\[test\]
+	rake stone:create\[test\]
+	rake test:start
+	cdmr
+	use maglev
+}
+
+function buildmaglevrecord() {
+	cdmr
+	use ruby
+	gem build *.gemspec
+	use maglev
+	mopt none
+	gem install  --no-rdoc --no-ri ./*.gem
+	cd -
+}
