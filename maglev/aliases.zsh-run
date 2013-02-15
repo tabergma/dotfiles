@@ -32,9 +32,9 @@ function newteststone() {
 function buildmaglevrecord() {
 	cdmr
 	use ruby
-	gem build *.gemspec
-	use maglev
-	mopt none
-	gem install  --no-rdoc --no-ri ./*.gem
-	cd -
+	gem build *.gemspec > /dev/null
+	use maglev > /dev/null
+	mopt none > /dev/null
+	gem install  --no-rdoc --no-ri ./*.gem > /dev/null
+	cd - > /dev/null
 }
