@@ -1,9 +1,19 @@
 begin
   # load wirble
-  require 'wirble'
+  #require 'wirble'
   # start wirble (with color)
-  Wirble.init
-  Wirble.colorize
+  #Wirble.init
+  #Wirble.colorize
 rescue LoadError => err
   warn "Couldn't load Wirble: #{err}"
+end
+
+if defined?(Maglev)
+  MP = Maglev::PERSISTENT_ROOT
+  def commit
+    Maglev.commit_transaction
+  end
+  def abort
+    Maglev.abort_transaction
+  end
 end
