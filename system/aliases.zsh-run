@@ -10,6 +10,7 @@ alias grep="grep -r --color -n -e"
 alias k="sudo kill -9"
 alias o='gnome-open'
 alias sl="sl -e -F"
+alias mousenotworkingfix='sudo rmmod psmouse && sudo modprobe psmouse'
 
 export EDITOR=vim
 export PAGER=less
