@@ -1,15 +1,11 @@
 [user]
-	name = Stefan Bunk
-	email = stefan.bunk@googlemail.com
+	name = Tanja Bergmann
+	email = tabergma@gmail.com
 [alias]
-	lg = log
 	st = status
-	timeline = log --oneline --graph --decorate
+	ci = commit
 	co = checkout
-	promote = !$ZSH/bin/git-promote
-	wtf     = !$ZSH/bin/git-wtf
-	rank-contributers = !$ZSH/bin/git-rank-contributers
-	count   = !git shortlog -sn
+	br = branch
 [color]
 	ui = true
 [core]
