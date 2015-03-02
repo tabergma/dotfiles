@@ -28,3 +28,6 @@ alias -s PKGBUILD=$EDITOR
 
 # http://stackoverflow.com/questions/5367068/clear-the-ubuntu-bash-screen-for-real
 alias cls='printf "\033c"'
+
+#vpn
+alias vpnhpi="snx -s 141.89.226.132 -u tanja.bergmann"

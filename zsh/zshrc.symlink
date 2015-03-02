@@ -8,7 +8,7 @@ plugins=(git gem ruby)
 source $ZSH/oh-my-zsh.sh
 
 # shortcut to this dotfiles path is $ZSH
-export DOTFILES=$HOME/Repository/dotfiles
+export DOTFILES=$HOME/Repositories/dotfiles
 
 # source every .zsh file in this rep
 for config_file ($DOTFILES/**/*.zsh-run) source $config_file
