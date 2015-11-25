@@ -17,3 +17,5 @@
 	tool = meld
 [push]
 	default = simple
+[url "https://"]
+	insteadOf = git://
