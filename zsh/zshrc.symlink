@@ -17,3 +17,6 @@ for config_file ($DOTFILES/**/*.zsh-run) source $config_file
 autoload -U compinit
 compinit
 
+
+# added by travis gem
+[ -f /home/tanja/.travis/travis.sh ] && source /home/tanja/.travis/travis.sh

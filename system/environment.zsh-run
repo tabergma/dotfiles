@@ -4,3 +4,6 @@ export HADOOP_PREFIX=/home/tanja/Documents/hadoop-2.5.1
 export HADOOP_HOME=/home/tanja/Documents/hadoop-2.5.1
 export JETTY_HOME=/opt/jetty/
 export SENTENCE_HOME=/home/tanja/Repositories/sentence-boundary-detection-nn
+export M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9
+export PYTHONPATH=/home/tanja/Repositories/caffe/python
+export PYTHONPATH=${PYTHONPATH}:/home/tanja/Repositories/sentence-boundary-detection-nn/python
