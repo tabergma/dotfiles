@@ -2,16 +2,12 @@
 	name = Tanja Bergmann
 	email = tabergma@gmail.com
 [alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
+	count   = !git shortlog -sn
 [color]
 	ui = true
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
-	mergeoptions = --no-ff
 	autocrlf = input
 [merge]
 	tool = meld

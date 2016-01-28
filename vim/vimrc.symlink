@@ -1,11 +1,69 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ==================================================
+" Start Vundle
+" ==================================================
 
+" Set vim to be non-compatible to vi
+set nocompatible
+" Vundle setup
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " ==================================================
-" Pathogen-Plugin to load other plugins
+" Plugins
 " ==================================================
-call pathogen#infect()
+" Let Vundle handle itself
+Plugin 'gmarik/Vundle.vim'
+" CtrlP for quick file search
+Plugin 'kien/ctrlp.vim'
+" EasyMotion, started with <Leader><Leader> allows to move by quick search end
+" points
+Plugin 'easymotion/vim-easymotion'
+" Allow quick alignment to :, = etc.
+Plugin 'godlygeek/tabular'
+" EditorConfig
+Plugin 'editorconfig/editorconfig-vim'
+" Cool status bar
+"Plugin 'bling/vim-airline'
+Plugin 'itchyny/lightline.vim'
+" Color parentheses in different colors for quick visual matching
+Plugin 'kien/rainbow_parentheses.vim'
+" Show indentation guides, start with <Leader>ig
+Plugin 'nathanaelkane/vim-indent-guides'
+" Scala
+Plugin 'derekwyatt/vim-scala'
+" Protobuffer
+Plugin 'uarun/vim-protobuf'
+" Switch between .c and .h
+Plugin 'vim-scripts/a.vim'
+" Multiple cursors like Sublime with Ctrl-n
+Plugin 'terryma/vim-multiple-cursors'
+" Git
+Plugin 'tpope/vim-fugitive'
+" Multiple searches at the same time with :Search
+Plugin 'MultipleSearch'
+" Gradle
+Plugin 'tfnico/vim-gradle'
+" Autocompletion!
+"Plugin 'Valloric/YouCompleteMe'
+" Rust plugin
+Plugin 'wting/rust.vim'
+Plugin 'cespare/vim-toml'
+" Comment stuff out: use gcc to comment out a line (takes a count),  gc in visual mode to comment out the selection
+Plugin 'tpope/vim-commentary'
+" Pressing star in visual mode searches for the current selection
+Plugin 'thinca/vim-visualstar'
+" Show markers
+Plugin 'kshenoy/vim-signature'
+" Encryption
+Plugin 'openssl.vim'
+" Handle large files by turning off some settings
+"Plugin 'LargeFile' " STOP: This plugin makes loading large files slower in my tests
+Plugin 'mhinz/vim-hugefile'
+let g:hugefile_trigger_size = '10000' " files over x MB are considered as large, NOTE: Apparently this is ignored for :/
+" Visible git undo tree
+Plugin 'sjl/gundo.vim'
+
+call vundle#end()
 
 " ==================================================
 " General Settings
@@ -13,76 +71,81 @@ call pathogen#infect()
 
 " Change the leader key to ,
 let mapleader = ","
+""" Some vim defaults everyone needs
+" Use 256 Colors in Terminal
+set t_Co=256
+" Allow mouse usage
+set mouse=a
+" Use fast terminal
+set ttyfast
+" Always show status line
+set laststatus=2
+" Use utf-8
+set encoding=utf-8
+" Manage multiple buffers efficiently: http://items.sjbach.com/319/configuring-vim-right
+set hidden
+" Avoid 'Press ENTER to continue ..'
+set shortmess=atI
+" Do not indent when pasting: press F11 before and again, afterwards
+set pastetoggle=<F12>
+" Store temporary files in a central spot
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" This changes the behavior of the very useful . command to leave the cursor at the point where it was before editing started.
+nmap . .`[
+" Set terminal title
+set title
 
-let g:tex_flavor='latex'
-" Set vim to be non-compatible to vi
-set nocompatible
+
+" ==================================================
+" Editing
+" ==================================================
+" Use colorscheme
+colorscheme fruidle
 " Set how many lines of history VIM has to remember
 set history=1000
 " Show linenumbers
 set number
+" Highlight active line
+set cursorline
 " Autoindent code
 set autoindent
-" Use utf-8
-set encoding=utf-8
-" Always show status line
-set laststatus=2
-" Auto reread new changes
-set autoread
-" Disable folding
-set nofoldenable
-" Only highlight 150 first characters of a line for performance reasons
-set synmaxcol=150
-" Use fast terminal
-set ttyfast
-" Enable filetype plugin
-set filetype=on
-filetype plugin on
-filetype indent off
+" Only highlight n first characters of a line for performance reasons
+set synmaxcol=300
+" Redraw only when need to: for example not in the middle of macros
+set lazyredraw
+
+" Map Ctrl-C and Ctrl-V
+map <C-V> "+gP
+cmap <C-V> <C-R>+
+vnoremap <C-C> "+y
+
 " Use four spaces for one tab
 set tabstop=4
 set shiftwidth=4
-" http://items.sjbach.com/319/configuring-vim-right
-set hidden
 " Maintain more context around the cursor
 set scrolloff=4
-" Stifle many interruptive prompts
-set shortmess=atI
-
 " Do not indent comments on next line.
 autocmd BufNewFile,BufRead * setlocal formatoptions=tnq
 
-
-" Do not indent when pasting: press F11 before and again, afterwards
-"set pastetoggle=<F11>
-
 " ==================================================
-" Terminal Settings
+" File management
 " ==================================================
-" Use 256 Colors in Terminal
-set t_Co=256
-" allow mouse usage
-set mouse=a
+" Auto reread new changes
+set autoread
+" Automatically detect markdown files
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" Automatically detect filetype
+set filetype=on
+filetype plugin on
+filetype indent off
+" Automaticall open new files on the right and below
+set filetype=on
+set splitright
+set splitbelow
+" Show how many options there are when autocompleting
+set wildmenu
 
-" ==================================================
-" Autocompletion settings
-" ==================================================
-
-" turn on
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-
-" automatically safe files when switching between them or when leaving vim
-set autowriteall
-autocmd FocusLost * silent! :wa
-autocmd TabLeave * silent! :wa
-
-" Automatically open NERDTree when no files where specified
-"autocmd vimenter * if !argc() | NERDTree | endif
 
 " ==================================================
 " Search
@@ -91,139 +154,96 @@ autocmd TabLeave * silent! :wa
 set incsearch
 " Highlight search
 set hlsearch
-" Show matches
+" Show matches braces
 set showmatch
 " Intelligent searching
 " If searching for an all-lowercase string search will be case-insensitive, but if one or more characters is uppercase search will be case-sensitive.
 set ignorecase
 set smartcase
-
-" Textmate style display of invisible characters (tab and newline)
-set listchars=tab:▸\ ,eol:¬
-"set list
-" Highlight active line
-set cursorline
-
-" Do not create swap files
-"set noswapfile
-" Store temporary files in a central spot
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
-" Use last one for latex-suite
-set grepprg=ack-grep\ -a
-set grepprg=grep\ -nH\ $*
-
-noremap ' `
-noremap ` '
-
-" Scroll viewport faster
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-
-" Show whitespace
-nmap <silent> <leader>s :set nolist!<CR>
-
-
-map <CR> o<ESC>k
-map <S-Enter> O<Esc>j
-
-map <F2> :SessionList<CR>
-map <F3> :execute 'NERDTreeToggle ' . getcwd()<CR>
-" Map Ctrl-C and Ctrl-V
-map <C-V> "+gP
-cmap <C-V> <C-R>+
-vnoremap <C-C> "+y
-
-" use j and i in autocompletion list to select list item
-inoremap <expr> j    ((pumvisible()) ? ("\<C-n>") : ("j"))
-inoremap <expr> k    ((pumvisible()) ? ("\<C-p>") : ("k"))
-" this mapping will change the behavior of the <Enter> key when the popup menu is visible: in that case the Enter key will simply select the highlighted menu item, just as <C-Y> does.
-
-set completeopt=menuone,longest
-
-" Rot-13 when pressing <F12>
-map <F12> ggVGg?
-
-map <F5> :make<CR>
-map <F6> :make run<CR>
-
-" This changes the behavior of the very useful . command to leave the cursor at the point where it was before editing started. 
-nmap . .`[
-
 " This gets rid of the distracting highlighting once I’ve found what I’m looking for.
 nnoremap <leader><space> :noh<CR>
 
+
+" ==================================================
+" Useful commands
+" ==================================================
+" Add new line under current line when pressing enter in normal mode
+nmap <CR> o<ESC>k
 " Auto align :'s
 map <leader>: :Tab /:\zs<CR>
 map <leader>= :Tab /=<CR>
 
-nmap <C-left> gT
-nmap <C-right> gt
 
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-nnoremap j gj
-nnoremap k gk
+" ==================================================
+" Gundo Plugin
+" ==================================================
+" Start Gundo plugin
+let g:gundo_width = 60
+let g:gundo_preview_height = 20
+nnoremap <leader>u :GundoToggle<CR>
 
-"cmap W w
-cmap WQ wq
-cmap wQ wq
-cmap Q q
+" ==================================================
+" CtrlP Plugin
+" ==================================================
+" Order matching files top to bottom
+let g:ctrlp_match_window = 'bottom,order:ttb'
+" Open files in new buffers
+let g:ctrlp_switch_buffer = 0
+" Allows to change working directory and make CtrlP respect that change
+let g:ctrlp_working_path = 0
+" Very fast file enumeration
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
-" use colorscheme
-if has('gui_running')
-  syntax enable
-  set background=light
-  colorscheme solarized
-else
-  colorscheme fruidle
-endif
+" Custom ignores for CtrlP
+" IMPORTANT NOTE: As we have a custom ctrlp_user_command, this custom ignore
+" will not be used. Still, keeping this in the file in case there is no ag
+" installed on the machine and we need basic CtrlP.
+"
+" Using \v allows to write () instead of \(\) and | instead of \|, see
+" http://vimdoc.sourceforge.net/htmldoc/pattern.html
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v\.(git|hg|svn)|target$',
+    \ 'file': '\v\.(exe|so)$',
+    \ 'link': 'some_bad_symbolic_links',
+\ }
 
-" Remove toolbar
-set guioptions-=T
-" Remove menu
-set guioptions-=m
-" Remove scrollbar
-set guioptions-=l
-set guioptions-=r
-set guioptions-=b
-
+" ==================================================
+" Rainbow Parenthesis Plugin
+" ==================================================
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 
 " ==================================================
-" Show tab number in tabs
+" Prototxt Plugin
 " ==================================================
-set showtabline=2
-function! GuiTabLabel()
-  let label = ''
-  let bufnrlist = tabpagebuflist(v:lnum)
-  for bufnr in bufnrlist
-    if getbufvar(bufnr, "&modified")
-      let label = '+'
-      break
-    endif
-  endfor
-  let label .= v:lnum.': '
-  let name = bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
-  if name == ''
-    if &buftype=='quickfix'
-      let name = '[Quickfix List]'
-    else
-      let name = '[No Name]'
-    endif
-  else
-    let name = fnamemodify(name,":t")
-  endif
-  let label .= name
-  let wincount = tabpagewinnr(v:lnum, '$')
-  return label . '  [' . wincount . ']'
-endfunction
-set guitablabel=%{GuiTabLabel()}
+augroup filetype
+   au! BufRead,BufNewFile *.prototxt setfiletype proto
+augroup end
 " ==================================================
+" Multicursor Plugin
+" ==================================================
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0

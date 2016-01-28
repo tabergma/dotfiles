@@ -1,0 +1,27 @@
+meld
+tree
+htop
+curl
+cmake
+
+ack-grep
+silversearcher-ag
+
+git
+vim
+
+acpi-call-tools
+tlp
+tlp-rdw
+
+ubuntu-restricted-extras
+ubuntu-restricted-addons
+
+gparted
+sl
+imagemagick
+texlive
+
+libsqlite3-0 libjpeg8 libpng12-0 exiv2 libtiff5 curl gphoto2 gnome-keyring fop openexr
+darktable
+
