@@ -4,7 +4,6 @@ alias bring-system-up-to-date='sudo apt-get update && sudo apt-get upgrade && su
 alias i='sudo apt-get install'
 
 alias pdflatex='pdflatex -halt-on-error'
-alias startvpn='snx -s 141.89.226.132 -u stefan.bunk'
 alias calc='gcalccmd'
 
 alias ack="ack-grep --ignore-dir=build --ignore-dir=antbuild"
@@ -34,6 +33,3 @@ alias -s PKGBUILD=$EDITOR
 # http://stackoverflow.com/questions/5367068/clear-the-ubuntu-bash-screen-for-real
 alias cls='printf "\033c"'
 
-#vpn
-alias vpnhpi="snx -s 141.89.226.132 -u tanja.bergmann"
-alias quitvpnhpi="snx -d"

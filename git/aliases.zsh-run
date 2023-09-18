@@ -20,3 +20,4 @@ alias grc='git rebase --continue'
 alias gtlrt='git stash && git pull --rebase && git stash pop'
 alias vimexclude="vim + .git/info/exclude"
 alias gt='git stash'
+alias gbd='git fetch -p; git branch --merged | egrep =v "(^\*|master|dev)" | xargs git branch -d'

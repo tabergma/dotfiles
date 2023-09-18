@@ -30,4 +30,11 @@ function head_meld() {
 	rm $2.head $3.head
 }
 
+funcion env_source() {
+    CURRENT_DIR=$(pwd)
+    cd /Users/tabergma/.virtualenv/$1/
+    pipenv shell
+    cd $CURRENT_DIR
+}
+
 setopt interactivecomments

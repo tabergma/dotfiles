@@ -1,5 +1,5 @@
 [user]
-	name = Tanja Bergmann
+	name = Tanja Bunk
 	email = tabergma@gmail.com
 [alias]
 	count   = !git shortlog -sn
