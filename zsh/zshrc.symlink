@@ -20,3 +20,10 @@ compinit
 
 # added by travis gem
 [ -f /home/tanja/.travis/travis.sh ] && source /home/tanja/.travis/travis.sh
+
+# pyenv
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+. $HOME/.asdf/asdf.sh

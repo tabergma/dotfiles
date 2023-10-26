@@ -6,7 +6,7 @@
 [color]
 	ui = true
 [core]
-	excludesfile = ~/.gitignore
+	excludesFile = ~/.gitignore
 	editor = vim
 	autocrlf = input
 [merge]

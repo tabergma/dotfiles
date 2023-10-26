@@ -30,11 +30,14 @@ function head_meld() {
 	rm $2.head $3.head
 }
 
-funcion env_source() {
-    CURRENT_DIR=$(pwd)
-    cd /Users/tabergma/.virtualenv/$1/
-    pipenv shell
-    cd $CURRENT_DIR
+function env_source() {
+    source .venv/bin/activate
+}
+
+function create_venv() {
+    pyenv local $1
+    python -m venv .venv
+    source .venv/bin/activate
 }
 
 setopt interactivecomments
