@@ -41,3 +41,6 @@ function create_venv() {
 }
 
 setopt interactivecomments
+
+# start ssh agent
+eval "$(ssh-agent -s)"
