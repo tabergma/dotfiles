@@ -9,6 +9,7 @@
 	excludesFile = ~/.gitignore
 	editor = vim
 	autocrlf = input
+	hooksPath = /dev/null
 [merge]
 	tool = meld
 [push]
